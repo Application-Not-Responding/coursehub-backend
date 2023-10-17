@@ -1,0 +1,3 @@
+[submodule "coursehub-openapi-specification"]
+	path = coursehub-openapi-specification
+	url = https://github.com/Application-Not-Responding/coursehub-openapi-specification
