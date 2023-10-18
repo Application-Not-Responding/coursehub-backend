@@ -13,6 +13,6 @@ public class CourseModel {
 
     private String name;
 
-    private String ownerName;
+    private Integer ownerId;
 
 }

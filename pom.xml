@@ -152,7 +152,7 @@
                         </goals>
                         <configuration>
                             <inputSpec>
-                                ${project.basedir}/open-api-contract/openapi/coursehub-backend-specification.yaml
+                                ${project.basedir}/coursehub-openapi-specification/open-api-contract/openapi/coursehub-backend-specification.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
                             <apiPackage>com.anr.openapi.api</apiPackage>
@@ -161,6 +161,7 @@
                                 ApiUtil.java
                             </supportingFilesToGenerate>
                             <configOptions>
+                                <useTags>true</useTags>
                                 <interfaceOnly>true</interfaceOnly>
                                 <useSpringController>true</useSpringController>
                                 <dateLibrary>joda</dateLibrary>
