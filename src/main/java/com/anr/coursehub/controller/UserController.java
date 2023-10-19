@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 @RequiredArgsConstructor
 public class UserController implements UsersApi {
 
-
-
     @Override
     public ResponseEntity<Void> loginOrganizer(Organizer organizer) {
         return UsersApi.super.loginOrganizer(organizer);

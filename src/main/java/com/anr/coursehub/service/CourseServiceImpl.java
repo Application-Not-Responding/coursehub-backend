@@ -28,13 +28,19 @@ public class CourseServiceImpl implements CourseService {
         mockOrganizer.setId(1);
         mockOrganizer.setUsername("Admin");
         courseModel.setOrganizer(foundOrganizer.orElse(mockOrganizer));
-        courseModel.setName(newCourseRequest.getName());
         return courseRepository.save(courseModel);
     }
 
     @Override
     public CourseModel getCourseById(Integer courseId){
-        return courseRepository.findById(courseId).orElseThrow();
+        CourseModel courseModel = new CourseModel();
+        courseModel.setName("New course");
+        OrganizerModel mockOrganizer = new OrganizerModel();
+        mockOrganizer.setId(1);
+        mockOrganizer.setUsername("Admin");
+        courseModel.setOrganizer(mockOrganizer);
+        courseModel.setId(1);
+        return courseRepository.findById(courseId).orElse(courseModel);
     }
 
 }
