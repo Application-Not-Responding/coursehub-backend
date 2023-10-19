@@ -2,6 +2,8 @@ package com.anr.coursehub.controller;
 
 import com.anr.coursehub.mapper.CourseOpenApiMapper;
 import com.anr.coursehub.model.CourseModel;
+import com.anr.coursehub.model.OrganizerModel;
+import com.anr.coursehub.service.CourseService;
 import com.anr.openapi.api.CoursesApi;
 import com.anr.openapi.model.*;
 import com.anr.openapi.model.Course;
@@ -20,10 +22,18 @@ public class CourseController implements CoursesApi {
 
     private final CourseOpenApiMapper courseMapper;
 
+    private final CourseService courseService;
+
     @Override
     public ResponseEntity<Course> addCourse(Integer organizerId, NewCourseRequest newCourseRequest) {
-        CourseModel course = new CourseModel(1, newCourseRequest.getName(), organizerId);
-        return ResponseEntity.ok(courseMapper.fromEntityToOpenApi(course));
+        CourseModel addedCourse = courseService.addCourse(organizerId, newCourseRequest);
+        return ResponseEntity.ok(null);//courseMapper.fromEntityToOpenApi(course));
+    }
+
+    @Override
+    public ResponseEntity<Course> getCourseById(Integer courseId) {
+        CourseModel foundCourse = courseService.getCourseById(courseId);
+        return ResponseEntity.ok(courseMapper.fromEntityToOpenApi(foundCourse));
     }
 
     @Override
@@ -54,14 +64,6 @@ public class CourseController implements CoursesApi {
     @Override
     public ResponseEntity<Void> editCourse(String organizerId, String courseId) {
         return CoursesApi.super.editCourse(organizerId, courseId);
-    }
-
-    @Override
-    public ResponseEntity<List<Course>> getCourseById(Integer courseId) {
-        CourseModel course = new CourseModel(courseId, "Abaoba", 1);
-        List<Course> coursesList = new ArrayList<Course>();
-        coursesList.add(courseMapper.fromEntityToOpenApi(course));
-        return ResponseEntity.ok(coursesList);
     }
 
     @Override

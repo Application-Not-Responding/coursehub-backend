@@ -11,25 +11,23 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class CourseModel {
+public class StudentModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private String description;
-
-    @ManyToOne
-    @JoinColumn(name="owner_id")
-    private OrganizerModel organizer;
+    private String username;
+    private String password;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "courses")
-    private Set<StudentModel> students;
-
-    @OneToMany(mappedBy = "course")
-    private Set<TopicModel> topics;
+    @ManyToMany
+    @JoinTable(
+            name = "student_course",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private Set<CourseModel> courses;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "student")
     private Set<FeedbackModel> feedbacks;
 }
